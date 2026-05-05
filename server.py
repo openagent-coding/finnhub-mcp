@@ -1974,7 +1974,10 @@ async def bank_branch(symbol: str) -> dict | list:
 
 def main() -> None:
     """Run the MCP server."""
-    mcp.run()
+    transport = os.environ.get("MCP_TRANSPORT", "sse")
+    host = os.environ.get("MCP_HOST", "0.0.0.0")
+    port = int(os.environ.get("MCP_PORT", "8000"))
+    mcp.run(transport=transport, host=host, port=port)
 
 
 if __name__ == "__main__":
